@@ -1,0 +1,445 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-cyan: var(--cyan);
+  --color-cyan-foreground: var(--cyan-foreground);
+
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+}
+
+
+/* ============================================================
+   ROOT THEME
+   ============================================================ */
+
+:root {
+  --radius: 0.75rem;
+
+  /* Main background */
+  --background: oklch(0.18 0.04 255);
+  --foreground: oklch(0.98 0.005 240);
+
+  /* Cards */
+  --card: oklch(0.23 0.045 257 / 0.85);
+  --card-foreground: oklch(0.98 0.005 240);
+
+  /* Popovers / dialogs */
+  --popover: oklch(0.22 0.045 257);
+  --popover-foreground: oklch(0.98 0.005 240);
+
+  /* Primary */
+  --primary: oklch(0.55 0.18 255);
+  --primary-foreground: oklch(0.99 0.005 240);
+
+  /* Secondary */
+  --secondary: oklch(0.28 0.05 258);
+  --secondary-foreground: oklch(0.98 0.005 240);
+
+  /* Muted */
+  --muted: oklch(0.27 0.04 258);
+  --muted-foreground: oklch(0.75 0.03 250);
+
+  /* Accent */
+  --accent: oklch(0.82 0.15 210);
+  --accent-foreground: oklch(0.15 0.04 255);
+
+  /* Error */
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Borders / inputs */
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.82 0.15 210);
+
+  /* SentinelAI colors */
+  --cyan: oklch(0.82 0.15 210);
+  --cyan-foreground: oklch(0.15 0.04 255);
+
+  --warning: oklch(0.78 0.16 75);
+  --success: oklch(0.72 0.17 155);
+
+  /* Sidebar */
+  --sidebar: oklch(0.15 0.04 257);
+  --sidebar-foreground: oklch(0.94 0.01 240);
+
+  --sidebar-primary: oklch(0.82 0.15 210);
+  --sidebar-primary-foreground: oklch(0.15 0.04 255);
+
+  --sidebar-accent: oklch(0.24 0.05 258);
+  --sidebar-accent-foreground: oklch(0.98 0.005 240);
+
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.82 0.15 210);
+
+  /* Gradients */
+  --gradient-hero:
+    linear-gradient(
+      135deg,
+      oklch(0.22 0.06 258) 0%,
+      oklch(0.18 0.04 255) 50%,
+      oklch(0.25 0.08 220) 100%
+    );
+
+  --gradient-cyan:
+    linear-gradient(
+      135deg,
+      oklch(0.82 0.15 210),
+      oklch(0.65 0.18 240)
+    );
+
+  /* Shadows */
+  --shadow-glow:
+    0 0 40px -10px oklch(0.82 0.15 210 / 0.5);
+
+  --shadow-card:
+    0 8px 32px -8px oklch(0.1 0.05 255 / 0.5);
+}
+
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+@layer base {
+
+  /*
+   * Universal border color
+   */
+  * {
+    border-color: var(--color-border);
+  }
+
+  /*
+   * Main application
+   */
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  body {
+    margin: 0;
+
+    background-image:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        oklch(0.4 0.18 240 / 0.25),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 40% at 100% 100%,
+        oklch(0.55 0.18 220 / 0.15),
+        transparent
+      );
+
+    background-attachment: fixed;
+
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+
+    color: var(--foreground);
+  }
+
+  /*
+   * Headings
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--foreground);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /*
+   * Paragraphs and normal text
+   */
+  p,
+  span,
+  label,
+  li,
+  td,
+  th {
+    color: inherit;
+  }
+
+  /*
+   * Links
+   */
+  a {
+    color: var(--cyan);
+  }
+
+  a:hover {
+    opacity: 0.85;
+  }
+
+  /*
+   * Inputs
+   */
+  input,
+  textarea,
+  select {
+    color: var(--foreground);
+    background-color: var(--input);
+  }
+
+  /*
+   * Placeholder
+   */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.8;
+  }
+
+  /*
+   * Select options
+   */
+  option {
+    background: oklch(0.20 0.04 255);
+    color: var(--foreground);
+  }
+
+  /*
+   * Buttons
+   */
+  button {
+    font-family: inherit;
+  }
+
+  /*
+   * Tables
+   */
+  table {
+    color: var(--foreground);
+  }
+
+  thead {
+    color: var(--muted-foreground);
+  }
+
+  /*
+   * Code
+   */
+  code,
+  pre {
+    color: var(--cyan);
+  }
+
+  /*
+   * Selection
+   */
+  ::selection {
+    background: oklch(0.82 0.15 210 / 0.25);
+    color: var(--foreground);
+  }
+}
+
+
+/* ============================================================
+   GLASS CARD
+   ============================================================ */
+
+@utility glass {
+  background: oklch(0.23 0.045 257 / 0.55);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid oklch(1 0 0 / 0.08);
+
+  box-shadow: var(--shadow-card);
+
+  color: var(--foreground);
+}
+
+
+/* ============================================================
+   GLOW
+   ============================================================ */
+
+@utility glow-cyan {
+  box-shadow: var(--shadow-glow);
+}
+
+
+/* ============================================================
+   CYAN GRADIENT TEXT
+   ============================================================ */
+
+@utility text-gradient-cyan {
+  background: var(--gradient-cyan);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+
+/* ============================================================
+   FORCE DARK THEME TEXT
+   ============================================================ */
+
+@layer utilities {
+
+  /*
+   * These utilities prevent accidental black text
+   * inside dark cards.
+   */
+
+  .text-theme {
+    color: var(--foreground) !important;
+  }
+
+  .text-theme-muted {
+    color: var(--muted-foreground) !important;
+  }
+
+  .text-theme-cyan {
+    color: var(--cyan) !important;
+  }
+
+  .text-theme-success {
+    color: var(--success) !important;
+  }
+
+  .text-theme-warning {
+    color: var(--warning) !important;
+  }
+
+  .text-theme-danger {
+    color: var(--destructive) !important;
+  }
+}
+
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.15 0.04 257);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.35 0.06 255);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.45 0.08 250);
+}
+
+
+/* ============================================================
+   FOCUS
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================
+   DISABLED
+   ============================================================ */
+
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* Button visibility fix */
+button {
+  color: white;
+}
+
+button:hover {
+  color: white;
+}
+
+/* Primary / gradient buttons */
+.bg-\[var\(--gradient-cyan\)\] {
+  background: var(--gradient-cyan) !important;
+  color: #07111f !important;
+  font-weight: 700;
+}
+
+/* Make disabled buttons still readable */
+button:disabled {
+  opacity: 0.6;
+  color: #ffffff !important;
+}
